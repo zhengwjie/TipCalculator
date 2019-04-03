@@ -37,15 +37,12 @@ namespace TipCalculator
         private void performCal()
         {
             var selectRadio= this.MyStackPanel.Children.OfType<RadioButton>().FirstOrDefault(r => r.IsChecked == true);
-            try {
-                tipcal.calTip(this.tipcal.billAmount, double.Parse(selectRadio.Tag.ToString()));
-            }catch(Exception)
+            if (selectRadio != null)
             {
-                MessageBox.Show("请选择一个单选框");
-                return;
+                tipcal.calTip(this.tipcal.billAmount, double.Parse(selectRadio.Tag.ToString()));
+                this.TipAmount.Content = "TipAmount: ￥" + tipcal.tipAmount.ToString("f2");
+                this.TotalAmount.Content = "TotalAmount: ￥" + tipcal.totalAmount.ToString("f2");
             }
-            this.TipAmount.Content = "TipAmount: ￥"+tipcal.tipAmount.ToString("f2");
-            this.TotalAmount.Content = "TotalAmount: ￥" + tipcal.totalAmount.ToString("f2");
         }
 
         private void lostFocus(object sender, RoutedEventArgs e)
@@ -66,10 +63,12 @@ namespace TipCalculator
             }
             this.tipcal.billAmount = billam;
             this.BillAmount.Text = "￥" + String.Format("{0:F}", billam);
+            performCal();
         }
 
         private void TextChange(object sender, TextChangedEventArgs e)
         {
+
         }
     }
 }
