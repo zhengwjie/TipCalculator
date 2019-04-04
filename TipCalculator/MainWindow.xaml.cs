@@ -47,11 +47,6 @@ namespace TipCalculator
 
         private void lostFocus(object sender, RoutedEventArgs e)
         {
-            performCal();
-        }
-        //按下回车键后，将TextBox中的数字转换成货币表示
-        private void keyDown(object sender, KeyEventArgs e)
-        {
             double billam = 0.00;
             try
             {
@@ -64,6 +59,12 @@ namespace TipCalculator
             this.tipcal.billAmount = billam;
             this.BillAmount.Text = "￥" + String.Format("{0:F}", billam);
             performCal();
+       
+        }
+        //按下回车键后，将TextBox中的数字转换成货币表示
+        private void keyDown(object sender, KeyEventArgs e)
+        {
+            
         }
 
         private void TextChange(object sender, TextChangedEventArgs e)
